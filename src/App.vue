@@ -1,15 +1,40 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
+    </div>-->
+    <!--  <router-view/> -->
+    <login v-if="false" />
+    <spinner />
+    <div class="conteudo">
+      <sidebar />
+      <!-- <content-bar /> -->
+      <router-view></router-view>
     </div>
-    <router-view/>
   </div>
 </template>
-
+<script>
+import Login from "./views/Login/Login";
+import Spinner from "./components/Spinner/spinner"
+/* import ContentBar from "./Layout/ContentBar" */
+import sidebar from "./Layout/SideBar"
+export default {
+  components: {
+    Login, Spinner, sidebar
+  }
+};
+</script>
 <style lang="scss">
-#app {
+/*#app {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+}
+ #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -25,5 +50,5 @@
       color: #42b983;
     }
   }
-}
+} */
 </style>

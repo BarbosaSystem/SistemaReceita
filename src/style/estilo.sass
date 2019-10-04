@@ -1,0 +1,72 @@
+@import '../../node_modules/bootstrap/scss/bootstrap.scss'
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css'
+@import 'input'
+@import 'variables'
+@import 'botoes'
+#app
+    @include make-container()
+    height: 100%
+    .conteudo
+        @include make-row()
+        min-height: 100vh
+        .login
+            text-align: center
+            @include media-breakpoint-up(xs)
+                @include make-col(12)
+                box-shadow: none
+                margin: 30% auto
+                padding: 15px
+                .login-titulo
+                    font-size: 1.8rem
+                    margin-top: 20px
+            @include media-breakpoint-up(md)
+                @include make-col(4)
+                @include make-col-offset(3)
+                margin: 10% auto
+                padding: 30px
+            &-box
+                .form-control
+                    margin: 30px auto
+                    border-radius: 0 !important
+                    text-align: center
+                .link
+                    display: block
+                    text-align: left
+    .side-bar
+        @include make-col(2)     
+        background-color: $color-primario
+        color: white
+        .titulo-logo
+            margin: 50px auto
+        .menu
+            margin-top: 75px
+            &-lista
+                list-style: none
+                padding: 0
+                align-items: center
+                &-item
+                    height: 60px
+                    font-size: 1.2rem
+                    font-weight: bold
+                    padding-left: 20px
+                    transition: .2s
+                    line-height: 3
+                    &:hover
+                        background-color: $color-secundario
+                    .link
+                        color: white
+                        text-decoration: none
+    .content-bar
+        @include make-col(10)
+        padding: 20px
+        .grupo-botoes
+            margin-top: 50px
+    .rodape
+        position: fixed
+        width: 100%
+        text-align: center
+        bottom: 0
+        margin-bottom: 10px
+        .titulo-rodape
+            font-size: 20px
+        

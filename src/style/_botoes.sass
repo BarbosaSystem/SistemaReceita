@@ -1,0 +1,24 @@
+.btn
+    margin: 5px
+    color: white
+    
+.btn-primary
+    background-color: $color-primario
+    border: none
+    &:hover
+        background-color: darken($color-primario, 20%)
+    &:active
+        background-color: darken($color-primario, 20%) !important
+        border: none
+.btn-sucesso
+    background-color: $color-sucesso
+    border: none
+    height: 38px
+    &:hover
+        background-color: darken($color-sucesso, 20%)
+        color: white
+.btn-cancelar
+    background-color: $color-danger
+    &:hover
+        background-color: darken($color-danger, 10%)
+        color: white
