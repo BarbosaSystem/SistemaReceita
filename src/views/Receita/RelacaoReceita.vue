@@ -14,8 +14,8 @@
           <tr>
             <td>Fulana de Tal</td>
             <td>20/09/2019</td>
-            <td>
-              <button class="btn btn-danger">
+            <td class="opcoes">
+              <button class="btn btn-primary" @click="AbrirModalMostrarReceita()">
                 <i class="fas fa-search"></i>
               </button>
             </td>
@@ -23,14 +23,30 @@
           <tr>
             <td>Fulana de Tal</td>
             <td>20/09/2019</td>
-            <td>
-              <button class="btn btn-danger">
+            <td class="opcoes">
+              <button class="btn btn-primary" @click="AbrirModalMostrarReceita()">
                 <i class="fas fa-search"></i>
               </button>
             </td>
           </tr>
         </tbody>
       </table>
+      <receita-viewer />
+      
     </div>
   </div>
 </template>
+<script>
+import ReceitaViewer from '../../components/Modal/Receitas/ModalViewReceita'
+
+export default {
+  components: {
+    ReceitaViewer
+  },
+  methods: {
+    AbrirModalMostrarReceita(){
+      this.$root.$emit("ModalViewReceita::show")
+    }
+  }
+}
+</script>

@@ -14,26 +14,21 @@
             <i class="fas fa-plus-circle"></i> Nova Receita
           </a>
         </router-link>
-        <!-- <li class="menu-lista-item">
-          <a href="#" class="link">
-            <i class="fas fa-plus-circle"></i> Nova Receita
-          </a>
-        </li>
-        <li class="menu-lista-item">
-          <a href="#" class="link">
+        <router-link class="menu-lista-item" to="/receitas" tag="li" replace active-class="ativo">
+          <a class="link">
             <i class="fas fa-list-alt"></i> Relação de Receitas
           </a>
-        </li>
-        <li class="menu-lista-item">
-          <a href="#" class="link">
+        </router-link>
+        <router-link class="menu-lista-item" to="/usuarios" tag="li" replace active-class="ativo">
+          <a class="link">
             <i class="fas fa-user"></i> Usuários do Sistema
           </a>
-        </li>
-        <li class="menu-lista-item">
-          <a href="#" class="link">
+        </router-link>
+        <router-link class="menu-lista-item" to="/logout" tag="li" replace active-class="ativo">
+          <a class="link">
             <i class="fas fa-sign-out-alt"></i> Sair
           </a>
-        </li> -->
+        </router-link>
       </ul>
     </div>
   </div>

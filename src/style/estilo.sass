@@ -1,8 +1,11 @@
 @import '../../node_modules/bootstrap/scss/bootstrap.scss'
 @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css'
-@import 'input'
 @import 'variables'
+@import 'input'
 @import 'botoes'
+@import 'modal'
+@import 'tabela'
+@import 'card'
 #app
     @include make-container()
     height: 100%
@@ -33,7 +36,7 @@
                     display: block
                     text-align: left
     .side-bar
-        @include make-col(2)     
+        @include make-col(3)     
         background-color: $color-primario
         color: white
         .titulo-logo
@@ -56,8 +59,10 @@
                     .link
                         color: white
                         text-decoration: none
+                    &.ativo
+                        background-color: $color-secundario
     .content-bar
-        @include make-col(10)
+        @include make-col(9)
         padding: 20px
         .grupo-botoes
             margin-top: 50px
