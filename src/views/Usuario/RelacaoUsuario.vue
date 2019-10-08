@@ -1,6 +1,6 @@
 <template>
   <div class="content-bar">
-    <h1 class="text-center" style="margin: 50px">Relação de Usuários</h1>
+    <h1 class="text-center titulo">Relação de Usuários</h1>
     <div class="form-group">
       <table class="table table-bordered">
         <thead>

@@ -1,6 +1,6 @@
 <template>
   <div class="content-bar">
-    <h1 class="text-center" style="margin: 50px">Relação de Receitas</h1>
+    <h1 class="text-center titulo">Relação de Receitas</h1>
     <div class="form-group">
       <table class="table table-bordered">
         <thead>
@@ -32,16 +32,17 @@
         </tbody>
       </table>
       <receita-viewer />
-      
+      <receita-print />
     </div>
   </div>
 </template>
 <script>
 import ReceitaViewer from '../../components/Modal/Receitas/ModalViewReceita'
+import ReceitaPrint from '../../components/Modal/Receitas/ModalReceitaPrint'
 
 export default {
   components: {
-    ReceitaViewer
+    ReceitaViewer, ReceitaPrint
   },
   methods: {
     AbrirModalMostrarReceita(){

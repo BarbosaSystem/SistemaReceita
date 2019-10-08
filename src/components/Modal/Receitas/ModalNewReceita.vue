@@ -16,10 +16,15 @@
                 <input type="text" class="form-control" placeholder="Dosagem">
                 <textarea class="form-control" cols="30" rows="10" placeholder="Descrição de uso"></textarea>
             </div>
+            <div class="form-group" v-if="alerta">
+              <div class="alert alert-success">
+                Adicionado
+              </div>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-cancelar" @click="OcultarModal()"><i class="fa fa-ban"></i> Cancelar</button>
-            <button type="button" class="btn btn-primary"><i class="fa fa-check"></i> Adicionar Item</button>
+            <button type="button" class="btn btn-primary" @click="Adicionar()"><i class="fa fa-check"></i> Adicionar Item</button>
           </div>
         </div>
       </div>
@@ -33,7 +38,8 @@
 export default {
   data() {
     return {
-      ShowModal: false
+      ShowModal: false,
+      alerta: false
     };
   },
   methods: {
@@ -42,6 +48,12 @@ export default {
     },
     MostrarModal() {
       this.ShowModal = true;
+    },
+    Adicionar(){
+      this.alerta = true
+      setTimeout(() => {
+        this.alerta = false
+      }, 2000);
     }
   },
   created() {

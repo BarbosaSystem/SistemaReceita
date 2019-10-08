@@ -8,30 +8,20 @@
 @import 'card'
 #app
     @include make-container()
-    height: 100%
+    /* height: 100% */
     .conteudo
         @include make-row()
         min-height: 100vh
         .login
-            text-align: center
-            @include media-breakpoint-up(xs)
+            @include make-col(4)
+            @include media-breakpoint-down(md)
                 @include make-col(12)
-                box-shadow: none
-                margin: 30% auto
-                padding: 15px
-                .login-titulo
-                    font-size: 1.8rem
-                    margin-top: 20px
-            @include media-breakpoint-up(md)
-                @include make-col(4)
-                @include make-col-offset(3)
-                margin: 10% auto
-                padding: 30px
+            margin: 170px auto
+            text-align: center
             &-box
-                .form-control
-                    margin: 30px auto
-                    border-radius: 0 !important
-                    text-align: center
+                padding: 40px
+                input
+                    margin: 10px auto
                 .link
                     display: block
                     text-align: left
@@ -39,14 +29,33 @@
         @include make-col(3)     
         background-color: $color-primario
         color: white
+        @include media-breakpoint-down(md)
+            @include make-col(12)
+            position: fixed
+            top: 0
+            left: 0
+            right: 0
+            width: 100%
+            .menu-lista
+                &-item
+                    display: inline-block
+                    width: 25%
         .titulo-logo
             margin: 50px auto
+            font-size: 1.5rem
+            @include media-breakpoint-down(md)
+                margin: 0px
         .menu
             margin-top: 75px
+            @include media-breakpoint-down(md)
+                margin-top: 0px
             &-lista
                 list-style: none
                 padding: 0
-                align-items: center
+                text-align: left
+                @include media-breakpoint-down(md)
+                    text-align: center
+                    margin-bottom: 0
                 &-item
                     height: 60px
                     font-size: 1.2rem
@@ -54,11 +63,18 @@
                     padding-left: 20px
                     transition: .2s
                     line-height: 3
+                    @include media-breakpoint-down(md)
+                        padding-left: 0px
                     &:hover
                         background-color: $color-secundario
                     .link
                         color: white
                         text-decoration: none
+                        .item-li
+                            margin-left: 5px
+                        @include media-breakpoint-down(md)
+                            .item-li
+                                display: none
                     &.ativo
                         background-color: $color-secundario
     .content-bar
@@ -66,12 +82,10 @@
         padding: 20px
         .grupo-botoes
             margin-top: 50px
-    .rodape
-        position: fixed
-        width: 100%
-        text-align: center
-        bottom: 0
-        margin-bottom: 10px
-        .titulo-rodape
-            font-size: 20px
+        @include media-breakpoint-down(md)
+            @include make-col(12)
+            margin-top: 120px
+        .titulo
+                margin: 50px auto
+    
         

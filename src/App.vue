@@ -5,7 +5,7 @@
       <router-link to="/about">About</router-link>
     </div>-->
     <!--  <router-view/> -->
-    <login v-if="false" />
+    <!-- <login v-if="false" /> -->
     <spinner />
     <div class="conteudo">
       <sidebar />
@@ -15,13 +15,13 @@
   </div>
 </template>
 <script>
-import Login from "./views/Login/Login";
+/* import Login from "./views/Login/Login"; */
 import Spinner from "./components/Spinner/spinner"
 /* import ContentBar from "./Layout/ContentBar" */
 import sidebar from "./Layout/SideBar"
 export default {
   components: {
-    Login, Spinner, sidebar
+    Spinner, sidebar
   }
 };
 </script>

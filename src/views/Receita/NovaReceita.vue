@@ -1,6 +1,6 @@
 <template>
   <div class="content-bar">
-    <h1 class="text-center" style="margin: 50px">Nova Receita</h1>
+    <h1 class="text-center titulo">Nova Receita</h1>
     <div class="form-group">
         <input type="text" class="form-control" placeholder="Nome do Cliente" />
       </div>

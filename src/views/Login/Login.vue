@@ -1,6 +1,6 @@
 <template>
-  <div class="conteudo">
-    <div class="login">
+  <div class="login">
+    <div class="">
       <h1 class="login-titulo">Sistema de Receita</h1>
       <h3 class="login-titulo">Acessar Sistema</h3>
       <div class="login-box">
@@ -21,9 +21,9 @@
         </button>
       </div>
     </div>
-    <div class="rodape">
+    <!-- <div class="rodape">
         <h1 class="titulo-rodape">MLM Sistemas - 2019</h1>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
