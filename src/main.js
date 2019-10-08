@@ -3,7 +3,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './style/estilo.sass'
+import FirebaseVue from './firebase'
 
+Vue.use(FirebaseVue)
 Vue.config.productionTip = false
 
 new Vue({

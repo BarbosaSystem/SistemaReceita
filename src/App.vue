@@ -22,7 +22,8 @@ import sidebar from "./Layout/SideBar"
 export default {
   components: {
     Spinner, sidebar
-  }
+  },
+ 
 };
 </script>
 <style lang="scss">
