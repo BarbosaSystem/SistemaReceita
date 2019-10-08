@@ -9,7 +9,7 @@
           <thead>
             <tr>
               <th>Item</th>
-              <th>Dosagem</th>
+              <th>Quantidade</th>
               <th>Tipo de Uso</th>
               <th>Opções</th>
             </tr>

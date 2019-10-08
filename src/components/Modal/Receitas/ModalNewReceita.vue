@@ -13,7 +13,7 @@
             <!-- <p>Woohoo, you're reading this text in a modal!</p> -->
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Nome do Item">
-                <input type="text" class="form-control" placeholder="Dosagem">
+                <input type="text" class="form-control" placeholder="Quantidade">
                 <textarea class="form-control" cols="30" rows="10" placeholder="Descrição de uso"></textarea>
             </div>
             <div class="form-group" v-if="alerta">

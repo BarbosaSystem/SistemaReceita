@@ -22,7 +22,7 @@
               <thead>
                 <tr>
                   <th>Nome do Item</th>
-                  <th>Dosagem</th>
+                  <th>Quantidade</th>
                   <th>Descrição</th>
                   <th>Tipo de uso</th>
                 </tr>
