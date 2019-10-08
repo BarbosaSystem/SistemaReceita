@@ -1,4 +1,15 @@
-# consultorioreceita
+# Sistema de Geração / Impressão de receitas médicas
+
+
+Projeto desenvolvido para atender uma clínica.
+
+MLM Sistemas
+
+Wireframe com as telas do sistema.
+
+Controle de Usuário
+Cadastro de Receitas
+Impressão de Receitas no formato específico A$
 
 ## Project setup
 ```
@@ -24,6 +35,7 @@ npm run test
 ```
 npm run lint
 ```
+
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
