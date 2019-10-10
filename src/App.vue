@@ -19,11 +19,31 @@
 import Spinner from "./components/Spinner/spinner"
 /* import ContentBar from "./Layout/ContentBar" */
 import sidebar from "./Layout/SideBar"
+import { mapActions } from "vuex";
 export default {
   components: {
     Spinner, sidebar
   },
- 
+  methods: {
+    ...mapActions(["Reconectar"])
+  },
+  computed: {
+    
+  },
+  mounted() {
+    this.$firebase.auth().onAuthStateChanged(user => {
+      this.$root.$emit('Spinner::show')
+      window.uid = user ? user.uid : null
+      if(user){
+        this.$store.dispatch("Reconectar", user)
+        /* this.$store.dispatch("Reconectar", user) */
+        this.$router.push("/nova_receita");
+      }
+      setTimeout(() => {
+        this.$root.$emit('Spinner::hide')
+      }, 2000);
+    });
+  }
 };
 </script>
 <style lang="scss">

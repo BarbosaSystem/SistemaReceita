@@ -2,7 +2,7 @@
   <div class="content-bar">
     <h1 class="text-center titulo">Nova Receita</h1>
     <div class="form-group">
-        <input type="text" class="form-control" placeholder="Nome do Cliente" />
+        <input type="text" class="form-control" placeholder="Nome do Cliente"/>
       </div>
       <div class="form-group">
         <table class="table table-bordered">
@@ -69,6 +69,14 @@ import ReceitaPrint from '../../components/Modal/Receitas/ModalReceitaPrint'
 export default {
   components: {
     ModalNovo, ReceitaPrint
+  },
+  data (){
+    return {
+      Cliente: {
+        Nome: 'Leonardo Barbosa',
+        Itens: []
+      }
+    }
   },
   methods: {
     AbrirModalNovaReceita(){

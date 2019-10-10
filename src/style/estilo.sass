@@ -13,18 +13,11 @@
         @include make-row()
         min-height: 100vh
         .login
-            @include make-col(4)
+            @include make-col(6)
+            @include make-col-offset(3)
             @include media-breakpoint-down(md)
-                @include make-col(12)
-            margin: 170px auto
-            text-align: center
-            &-box
-                padding: 40px
-                input
-                    margin: 10px auto
-                .link
-                    display: block
-                    text-align: left
+                @include make-col(12) 
+                @include make-col-offset(0)          
     .side-bar
         @include make-col(3)     
         background-color: $color-primario

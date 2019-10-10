@@ -3,19 +3,7 @@
     <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div> -->
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-4">
-        <h1 class="page-header text-center">Bom vindo!</h1>
-      </div>
-      <div class="col-md-4 ">
-        <h1 class="page-header text-center">Bom vindo!</h1>
-      </div>
-      <div class="col-md-4 ">
-        <h1 class="page-header text-center">Bom vindo!</h1>
-      </div>
-    </div>
-  </div>
+  <div></div>
 </template>
 
 <script>
@@ -26,7 +14,10 @@ export default {
   name: 'home',
   components: {
    /*  HelloWorld */
-  }
+  },
+  mounted() {
+    this.$router.replace('/login')
+  },
 }
 </script>
 <style lang="sass">
