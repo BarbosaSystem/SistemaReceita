@@ -45,6 +45,7 @@ export const router = new Router({
         title: 'Nova Receita',
         requiresAuth: true
       },
+      
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
@@ -93,6 +94,12 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
+
+/* router.beforeRouteLeave( (to, from, next) => {
+  if(confirm("Deseja sair?")){
+    next()
+  }
+}) */
 /* router.beforeEach ( (to, from, next) =>{
   let routerAuthCheck = false;
 

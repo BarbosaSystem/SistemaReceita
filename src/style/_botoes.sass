@@ -8,8 +8,13 @@
     &:hover
         background-color: darken($color-primario, 20%)
     &:active
-        background-color: darken($color-primario, 20%) !important
+        background-color: darken($color-primario, 20%)
         border: none
+    &:disabled
+        cursor: not-allowed
+    &:hover:disabled
+        /* background-color: #b2bec3 */
+        
 .btn-warning
     background-color: $color-option
     border: none
