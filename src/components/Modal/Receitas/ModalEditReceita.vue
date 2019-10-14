@@ -4,7 +4,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLiveLabel">Adicionar Item</h5>
+            <h5 class="modal-title" id="exampleModalLiveLabel">Editar Item</h5>
             <button type="button" class="close" aria-label="Close" @click="OcultarModal()">
               <span aria-hidden="true">×</span>
             </button>
@@ -66,14 +66,13 @@ export default {
         descricao: '',
       }
     },
-    async AdicionarItens(){
+    AdicionarItens(){
       if(this.ValidarFormulario(this.listaReceita.Item) && this.ValidarFormulario(this.listaReceita.quantidade) && this.ValidarFormulario(this.listaReceita.descricao)){
         var receita = {
           NomeItem: this.listaReceita.Item,
           Quantidade: this.listaReceita.quantidade,
           Descricao: this.listaReceita.descricao
         }
-
         this.ActionAdicionarReceitaItem(receita)
         this.LimparCampo()
         /* this.OcultarModal() */
@@ -94,10 +93,10 @@ export default {
     }
   },
   created() {
-    this.$root.$on("ModalNewReceita::show", () => {
+    this.$root.$on("ModalEditReceita::show", () => {
       this.MostrarModal();
     });
-    this.$root.$on("ModalNewReceita::hide", () => {
+    this.$root.$on("ModalEditReceita::hide", () => {
       this.OcultarModal();
     });
   }

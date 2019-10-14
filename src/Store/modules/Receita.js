@@ -1,3 +1,4 @@
+import firebase from 'firebase/database'
 
 export default {
     state: {
@@ -11,16 +12,30 @@ export default {
         MutationNovaReceita(state, payload){
             payload.codigo = state.ListaReceita.length
             state.ListaReceita.push(payload)
+        },
+        MutationLimparcliente(state){
+            state.Cliente = ''
+        },
+        MutationLimparReceitas(state){
+            state.ListaReceita = []
         }
     },
     actions: {
         ActionAdicionarCliente({commit}, payload){
             commit("MutationAdicionarNovoCliente", payload)
-            console.log(this.$firebase.currentUser)
         },
         ActionAdicionarReceitaItem({commit}, payload){
             commit("MutationNovaReceita", payload)
+        },
+        ActionLimparCliente({commit}){
+            commit("MutationLimparcliente")
+        },
+        ActionLimparListaReceita({commit}){
+            commit("MutationLimparReceitas")
+
         }
+
+
     },
     getters: {
         GetCliente(state){

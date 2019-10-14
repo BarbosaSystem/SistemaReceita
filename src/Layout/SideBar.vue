@@ -18,6 +18,12 @@
             <i class="fas fa-user"></i> <span class="item-li">Usuários do Sistema</span>
           </a>
         </router-link>
+        <!-- <router-link class="menu-lista-item" to="/configuracao" tag="li" replace active-class="ativo">
+          <a class="link">
+            <i class="fas fa-cog"></i> <span class="item-li">Configurações</span>
+          </a>
+        </router-link> -->
+        
         <router-link class="menu-lista-item"  to v-on:click.native="Desconectar()" tag="li">
           <a class="link">
             <i class="fas fa-sign-out-alt"></i> <span class="item-li">Sair</span>
