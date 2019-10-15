@@ -1,4 +1,4 @@
-export default {
+const Login = {
     state: {
         login: null
     },
@@ -26,7 +26,6 @@ export default {
                         displayName: payload.displayName,
                         email: payload.email,
                         photoURL: payload.photoURL,
-                        phoneNumber: payload.phoneNumber
                     }
                     commit("MutationLogin", usuario)
                 }
@@ -39,3 +38,5 @@ export default {
         }
     }
 }
+
+export default Login

@@ -24,7 +24,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-cancelar" @click="OcultarModal()"><i class="fa fa-ban"></i> Cancelar</button>
-            <button :disabled="!Validar" type="button" class="btn btn-primary" @click="AdicionarItens()"><i class="fa fa-check"></i> Adicionar Item</button>
+            <button :disabled="!Validar" type="button" class="btn btn-primary" @click.stop.prevent="AdicionarItens()"><i class="fa fa-check"></i> Adicionar Item</button>
           </div>
         </div>
       </div>
@@ -40,9 +40,9 @@ export default {
   data() {
     return {
       listaReceita: {
-        Item:'',
-        quantidade: '',
-        descricao: '',
+        Item:'Anador',
+        quantidade: '1cx',
+        descricao: '8 em 8 horas',
       },
       ShowModal: false,
       alerta: false
@@ -73,8 +73,8 @@ export default {
           Quantidade: this.listaReceita.quantidade,
           Descricao: this.listaReceita.descricao
         }
-
-        this.ActionAdicionarReceitaItem(receita)
+        this.$emit('AddItemLista', receita)
+        /* this.ActionAdicionarReceitaItem(receita) */
         this.LimparCampo()
         /* this.OcultarModal() */
       }

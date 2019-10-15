@@ -24,7 +24,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-cancelar" @click="OcultarModal()"><i class="fa fa-ban"></i> Cancelar</button>
-            <button :disabled="!Validar" type="button" class="btn btn-primary" @click="AdicionarItens()"><i class="fa fa-check"></i> Adicionar Item</button>
+            <button :disabled="!Validar" type="button" class="btn btn-primary" @click.stop.prevent="AtualizarReceitaItem()"><i class="fa fa-check"></i> Atualizar Item</button>
           </div>
         </div>
       </div>
@@ -35,11 +35,12 @@
   </div>
 </template>
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 export default {
   data() {
     return {
       listaReceita: {
+        codigo: '',
         Item:'',
         quantidade: '',
         descricao: '',
@@ -49,31 +50,35 @@ export default {
     };
   },
   computed: {
+    ...mapGetters(["GetLoadReceitaItem"]),
     Validar(){
       return this.ValidarFormulario(this.listaReceita.Item) && this.ValidarFormulario(this.listaReceita.quantidade) && this.ValidarFormulario(this.listaReceita.descricao)
     }
   },
   methods: {
-    ...mapActions(["ActionAdicionarReceitaItem"]),
+    ...mapActions(["ActionAtualizarReceitaItem"]),
     ValidarFormulario(campo){
       return campo != ''
     },
     LimparCampo(){
       
       this.listaReceita = {
+        codigo: '',
         Item:'',
         quantidade: '',
         descricao: '',
       }
     },
-    AdicionarItens(){
+
+    AtualizarReceitaItem(){
       if(this.ValidarFormulario(this.listaReceita.Item) && this.ValidarFormulario(this.listaReceita.quantidade) && this.ValidarFormulario(this.listaReceita.descricao)){
         var receita = {
+          Codigo: this.listaReceita.codigo,
           NomeItem: this.listaReceita.Item,
           Quantidade: this.listaReceita.quantidade,
           Descricao: this.listaReceita.descricao
         }
-        this.ActionAdicionarReceitaItem(receita)
+        this.$emit('ItemLista', receita)
         this.LimparCampo()
         /* this.OcultarModal() */
       }
@@ -90,11 +95,18 @@ export default {
       setTimeout(() => {
         this.alerta = false
       }, 2000);
+    },
+    CarregarDados(objeto){
+      this.listaReceita.codigo = objeto.codigo
+      this.listaReceita.Item = objeto.NomeItem
+      this.listaReceita.quantidade = objeto.Quantidade
+      this.listaReceita.descricao = objeto.Descricao
     }
   },
   created() {
-    this.$root.$on("ModalEditReceita::show", () => {
+    this.$root.$on("ModalEditReceita::show", (receitaItem) => {
       this.MostrarModal();
+      this.CarregarDados(receitaItem)
     });
     this.$root.$on("ModalEditReceita::hide", () => {
       this.OcultarModal();

@@ -32,12 +32,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item in GetListaReceita" :key="item.codigo">
+            <tr v-for="(item, index) in ListaReceita" :key="index">
               <td>{{item.NomeItem}}</td>
               <td>{{item.Quantidade}}</td>
               <td>{{item.Descricao}}</td>
               <td class="text-center">
-                <button class="btn btn-warning" @click="EditarModalReceita()">
+                <button class="btn btn-warning" @click="MostrarReceitaItem(index)">
                   <i class="fas fa-pen-square"></i>
                 </button>
                 <button class="btn btn-danger">
@@ -51,7 +51,7 @@
           <i class="fas fa-plus-circle"></i> Adicionar Item
         </button>
       </div>
-      <div class="grupo-botoes" v-if="GetListaReceita.length >= 1">
+      <div class="grupo-botoes" v-if="ListaReceita.length >= 1">
         <button class="btn btn-sucesso" @click="GravarDados()">
           <i class="fas fa-check-circle"></i> Gravar Dados
         </button>
@@ -59,8 +59,8 @@
           <i class="fas fa-ban"></i> Cancelar
         </button>
       </div>
-    <modal-edit />
-    <modal-novo />
+    <modal-edit @ItemLista="EditarItemReceita" />
+    <modal-novo @AddItemLista="AdicionarItemReceita" />
     <receita-print />
     <!-- <toast /> -->
   </div>
@@ -93,18 +93,41 @@ export default {
     this.ActionDadosGravados(false)
   },
   computed: {
-    ...mapGetters(["GetCliente", "GetListaReceita", "GetDadosGravados"]),
+    ...mapGetters(["GetCliente", "GetListaReceita", "GetDadosGravados", "GetLoadReceitaItem"]),
     LiberarAdicionarCliente(){
       return this.GetCliente != ''
     }
   },
   methods: {
     ...mapActions(["ActionAdicionarCliente", "ActionLimparCliente", "ActionLimparListaReceita", "ActionDadosGravados"]),
+    AdicionarItemReceita(index){
+      this.ListaReceita.push(index)
+    },
+    EditarItemReceita(index){
+      var receita = {
+        NomeItem: index.NomeItem,
+        Quantidade: index.Quantidade,
+        Descricao: index.Descricao
+      }
+      var vm = this
+      /* this.ListaReceita.$set(index.Codigo, receita) */
+      vm.$set(vm.ListaReceita, index.Codigo, {
+        NomeItem: index.NomeItem,
+        Quantidade: index.Quantidade,
+        Descricao: index.Descricao
+      })
+    },
     AdicionarCliente(){
       if(this.Cliente.Nome != ''){
         this.ActionAdicionarCliente(this.Cliente.Nome)
         this.Editar = false
       }
+    },
+    MostrarReceitaItem(codigo){
+      var receita = this.ListaReceita[codigo]
+      receita.codigo = codigo
+      this.$root.$emit("ModalEditReceita::show", receita)
+
     },
     EditarCliente(){
       this.Editar = true
@@ -117,18 +140,21 @@ export default {
       this.$root.$emit("ModalNewReceita::show")
     },
     async GravarDados(){
-      await this.$firebase.database().ref('Receita/').push({
-        /*INCLUIR DATA E HORA */
+      this.$root.$emit("Spinner::show")
+      const ReceitaItem = {
         NomeCliente: this.Cliente.Nome,
-        ListaReceita: this.GetListaReceita
-      }).then( () => {
+        ListaReceita: this.ListaReceita
+      }
+      await this.$firebase.database().ref('Receita/').push(ReceitaItem).then( () => {
         this.ActionLimparCliente()
         this.ActionLimparListaReceita()
         this.ActionDadosGravados(true)
         this.Cliente.Nome = ''
         this.Editar = true
+        
         this.Imprimir()
       })
+      this.$root.$emit("Spinner::hide")
     },
     Imprimir(){
       this.$root.$emit("ModalPrint::show");
