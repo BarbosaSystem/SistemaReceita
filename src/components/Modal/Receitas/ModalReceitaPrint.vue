@@ -5,33 +5,35 @@
       <div class="row">
         <div class="col-md-12">
           <div class="card">
-            <div class="card-header text-center">
+            <div class="card-header text-center" style="visibility: hidden;">
               <h1 class="text-center">Dr. José Jacinto Araújo Martins</h1>
               <h4 class="text-center">ENDOCRINOLOGIA E METABOLOGIA</h4>
               <h4 class="text-center">CRM 19.018</h4>
             </div>
             <div class="card-body">
-                <h2 style="font-size: 1.5rem">Nome do Paciente: Fulano de Tal</h2>
-                <h2 style="font-size: 1.5rem">Data: 07/10/2019</h2>
+                <h2 style="font-size: 1.5rem">Nome do Paciente: {{Receita.NomeCliente}}</h2>
+                <h2 style="font-size: 1.5rem">Data: {{Receita.Data}}</h2>
                 <h1 class="text-center">
                   Receituário
                 </h1>
                 <div class="area-prescricao" style="font-family: Courier new">
-                <ul class="lista-receita" style="list-style: none">
+                <ul class="lista-receita" style="list-style: none" v-for="(lista, index) in Receita.ListaReceita" :key="index">
                   <li class="lista-receita-item">
-                    1 - Predsim 20mg - 1 caixa
+                    <span class="badge badge-light">{{index + 1}} </span>
+                     {{lista.NomeItem}} {{lista.Quantidade}}
+                    
                     <br />
-                    <span class="observacao">Observação: tomar 2 co. após café da manhã p/ 5 dias.</span>
+                    <span class="observacao">Observação: {{lista.Descricao}}</span>
                   </li>
-                  <li class="lista-receita-item">
+                  <!-- <li class="lista-receita-item">
                     2 - Piemont ou Viatine 10mg - 90 dias
                     <br />
                     <span class="observacao">Observação: tomar 1 cp. anoite.</span>
-                  </li>
+                  </li> -->
                 </ul>
               </div>
             </div>
-            <div class="card-footer" style="position: fixed; bottom: 0; left:0; right:0; text-align: center">
+            <div class="card-footer" style="visibility: hidden; position: fixed; bottom: 0; left:0; right:0; text-align: center">
               <h5 class="text-center">Rua Barão do Rio Branco, 681 - SALA 1006 - Centro - Ed. Climério Vieira</h5>
               <h5 class="text-center">Fone: (33) 3271-7394 / 99803-7394 - Governador Valadares - Minas Gerais</h5>
             </div>
@@ -64,14 +66,25 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 export default {
   data() {
     return {
       print: false,
-      ShowModal: false
+      ShowModal: false,
+      Receita: {
+        NomeCliente: '',
+        ListaReceita: [],
+        Data: ''
+      }
     };
   },
+  computed: {
+    ...mapGetters(["GetReceitaInfo"]),
+    
+  },
   methods: {
+    
     OcultarModal() {
       this.ShowModal = false;
     },
@@ -81,11 +94,21 @@ export default {
     Imprimir() {
       this.OcultarModal();
       window.print();
+    },
+    CarregarInfo(dados){
+      let receita = this.GetReceitaInfo(dados)
+      this.Receita = {
+        NomeCliente: receita.NomeCliente,
+        ListaReceita: receita.ListaReceita,
+        Data: receita.Data
+      }
     }
   },
   created() {
-    this.$root.$on("ModalPrint::show", () => {
+    this.$root.$on("ModalPrint::show", (ReceitaItens) => {
       this.MostrarModal();
+      this.CarregarInfo(ReceitaItens)
+      /* console.log(this.GetReceitaInfo(ReceitaItens)) */
     });
     this.$root.$on("ModalPrint::hide", () => {
       this.OcultarModal();

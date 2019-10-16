@@ -37,8 +37,16 @@
   </div>
 </template>
 <script>
-import {mapActions} from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
 export default {
+    computed: {
+        ...mapGetters(["GetLogin"])
+    },
+    created() {
+    if (this.GetLogin) {
+      this.$router.push("/receitas");
+    }
+  },
     data(){
         return {
             Loading: false,

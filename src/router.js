@@ -55,7 +55,7 @@ export const router = new Router({
       path: '/receitas',
       name: 'lista_receitas',
       meta: {
-        title: 'Nova Receita',
+        title: 'Relação de Clientes',
         requiresAuth: true
       },
       // route level code-splitting
@@ -94,34 +94,5 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
-
-/* router.beforeRouteLeave( (to, from, next) => {
-  if(confirm("Deseja sair?")){
-    next()
-  }
-}) */
-/* router.beforeEach ( (to, from, next) =>{
-  let routerAuthCheck = false;
-
-  if(to.matched.some(record => record.meta.requiresAuth)){
-    if(routerAuthCheck){
-      next()
-    }
-    else{
-      router.replace('/login')
-    }
-  }
-}) */
-
-/* router.beforeEach((to, from, next) => {
-  if(!window.uid && to.name !== 'login'){
-    next({name: 'login'})
-  }
-  else {
-    next()
-  }
-}) */
-
-
 
 export default router

@@ -1,9 +1,9 @@
-import Vue from 'vue'
 const Receita =  {
     state: {
         Cliente: '',
         ListaReceita: [],
-        Receita: null
+        Receita: null,
+        Dados: []
     },
     mutations: {
         MutationAdicionarNovoCliente(state, payload) {
@@ -18,25 +18,20 @@ const Receita =  {
         MutationLimparReceitas(state) {
             state.ListaReceita = []
         },
-        AtualizaReceitaItem(state, todo) {
-            /* let receitaItem = {
-                NomeItem: todo.NomeItem,
-                Quantidade: todo.Quantidade,
-                Descricao: todo.Descricao
-            } */
-            /* Vue.set(this.$store.state.ListaReceita, todo.codigo, receitaItem)
-            state.ListaReceita[todo.Codigo] = {
-                NomeItem: todo.NomeItem,
-                Quantidade: todo.Quantidade,
-                Descricao: todo.Descricao
-            } */
+        MutationCarregarLista(state, payload){
+            state.Dados = payload
         },
+        RemoverReceita(state, payload){
+            var todos = state.Dados
+            todos.splice(todos.indexOf(payload), 1)
+        }
     },
     actions: {
-        ActionAdicionarCliente({
-            commit
-        }, payload) {
+        ActionNovoCliente({commit}, payload){
             commit("MutationAdicionarNovoCliente", payload)
+        },
+        ActionAdicionarCliente({commit}, payload){
+            commit("MutationCarregarLista", payload)
         },
         ActionAdicionarReceitaItem({
             commit
@@ -53,24 +48,29 @@ const Receita =  {
         },
         ActionAtualizarReceitaItem({commit}, payload){
             commit("AtualizaReceitaItem", payload)
+        },
+        ActionRemoverReceita({commit}, payload){
+            commit("RemoverReceita", payload)
         }
 
     },
     getters: {
+        GetLoadReceitas(state){
+            return state.Dados
+        },
         GetCliente(state) {
             return state.Cliente
         },
         GetListaReceita(state) {
             return state.ListaReceita
         },
-        GetLoadReceitaItem (state){
-            return(id) => {
-                return state.ListaReceita[id]
-                /* return state.ListaReceita.indexOf(id, 1) */
-                /* return state.ListaReceita.find((receita) => {
-                    return receita.id === id
-                } )*/
-            }
+
+        GetReceitaInfo (state){
+            return (codigo) => {
+                return state.Dados.find((receitaItem) => {
+                  return receitaItem.codigo === codigo
+                })
+              }
         }
     }
 }

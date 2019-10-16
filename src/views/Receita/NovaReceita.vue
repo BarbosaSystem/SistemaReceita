@@ -27,7 +27,7 @@
             <tr>
               <th>Item</th>
               <th>Quantidade</th>
-              <th>Tipo de Uso</th>
+              <th>Descrição</th>
               <th>Opções</th>
             </tr>
           </thead>
@@ -40,7 +40,7 @@
                 <button class="btn btn-warning" @click="MostrarReceitaItem(index)">
                   <i class="fas fa-pen-square"></i>
                 </button>
-                <button class="btn btn-danger">
+                <button class="btn btn-danger" disabled="disabled">
                   <i class="fas fa-window-close"></i>
                 </button>
               </td>
@@ -93,22 +93,17 @@ export default {
     this.ActionDadosGravados(false)
   },
   computed: {
-    ...mapGetters(["GetCliente", "GetListaReceita", "GetDadosGravados", "GetLoadReceitaItem"]),
+    ...mapGetters(["GetCliente", "GetListaReceita", "GetDadosGravados"]),
     LiberarAdicionarCliente(){
       return this.GetCliente != ''
     }
   },
   methods: {
-    ...mapActions(["ActionAdicionarCliente", "ActionLimparCliente", "ActionLimparListaReceita", "ActionDadosGravados"]),
+    ...mapActions(["ActionNovoCliente", "ActionLimparCliente", "ActionLimparListaReceita", "ActionDadosGravados"]),
     AdicionarItemReceita(index){
       this.ListaReceita.push(index)
     },
     EditarItemReceita(index){
-      var receita = {
-        NomeItem: index.NomeItem,
-        Quantidade: index.Quantidade,
-        Descricao: index.Descricao
-      }
       var vm = this
       /* this.ListaReceita.$set(index.Codigo, receita) */
       vm.$set(vm.ListaReceita, index.Codigo, {
@@ -119,7 +114,7 @@ export default {
     },
     AdicionarCliente(){
       if(this.Cliente.Nome != ''){
-        this.ActionAdicionarCliente(this.Cliente.Nome)
+        this.ActionNovoCliente(this.Cliente.Nome)
         this.Editar = false
       }
     },
@@ -139,25 +134,30 @@ export default {
     AbrirModalNovaReceita(){
       this.$root.$emit("ModalNewReceita::show")
     },
+    AdicionarData(){
+      return new Date.now()
+    },
     async GravarDados(){
       this.$root.$emit("Spinner::show")
-      const ReceitaItem = {
+      let dataReceita = new Date()
+      var ReceitaItem = {
         NomeCliente: this.Cliente.Nome,
-        ListaReceita: this.ListaReceita
+        ListaReceita: this.ListaReceita,
+        Data: dataReceita.getDate() +'/'+ (dataReceita.getMonth() + 1 )+'/' + dataReceita.getFullYear()
       }
-      await this.$firebase.database().ref('Receita/').push(ReceitaItem).then( () => {
+      await this.$firebase.database().ref('Receita/').push(ReceitaItem).then( (data) => {
+        console.log(data.key)
         this.ActionLimparCliente()
-        this.ActionLimparListaReceita()
+        this.ListaReceita = []
         this.ActionDadosGravados(true)
         this.Cliente.Nome = ''
         this.Editar = true
-        
-        this.Imprimir()
+        this.Imprimir(data.key)
       })
       this.$root.$emit("Spinner::hide")
     },
-    Imprimir(){
-      this.$root.$emit("ModalPrint::show");
+    Imprimir(dados){
+      this.$root.$emit("ModalPrint::show", dados);
       /* this.$router.push("/receitas"); */
     }
   },
