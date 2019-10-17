@@ -40,7 +40,7 @@
                 <button class="btn btn-warning" @click="MostrarReceitaItem(index)">
                   <i class="fas fa-pen-square"></i>
                 </button>
-                <button class="btn btn-danger" disabled="disabled">
+                <button class="btn btn-danger" @click="RemoverReceitaItem(index)">
                   <i class="fas fa-window-close"></i>
                 </button>
               </td>
@@ -62,11 +62,9 @@
     <modal-edit @ItemLista="EditarItemReceita" />
     <modal-novo @AddItemLista="AdicionarItemReceita" />
     <receita-print />
-    <!-- <toast /> -->
   </div>
 </template>
 <script>
-/* import toast from '../../components/Toast/Toast' */
 import ModalNovo from '../../components/Modal/Receitas/ModalNewReceita'
 import ModalEdit from '../../components/Modal/Receitas/ModalEditReceita'
 import ReceitaPrint from '../../components/Modal/Receitas/ModalReceitaPrint'
@@ -99,9 +97,12 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["ActionNovoCliente", "ActionLimparCliente", "ActionLimparListaReceita", "ActionDadosGravados"]),
+    ...mapActions(["ActionAdicionarCliente","ActionNovoCliente", "ActionLimparCliente", "ActionLimparListaReceita", "ActionDadosGravados"]),
     AdicionarItemReceita(index){
       this.ListaReceita.push(index)
+    },
+    RemoverReceitaItem(index){
+      this.ListaReceita.splice(index, 1)
     },
     EditarItemReceita(index){
       var vm = this
@@ -122,7 +123,6 @@ export default {
       var receita = this.ListaReceita[codigo]
       receita.codigo = codigo
       this.$root.$emit("ModalEditReceita::show", receita)
-
     },
     EditarCliente(){
       this.Editar = true
@@ -145,14 +145,21 @@ export default {
         ListaReceita: this.ListaReceita,
         Data: dataReceita.getDate() +'/'+ (dataReceita.getMonth() + 1 )+'/' + dataReceita.getFullYear()
       }
+      
       await this.$firebase.database().ref('Receita/').push(ReceitaItem).then( (data) => {
-        console.log(data.key)
         this.ActionLimparCliente()
         this.ListaReceita = []
         this.ActionDadosGravados(true)
         this.Cliente.Nome = ''
         this.Editar = true
-        this.Imprimir(data.key)
+        var dados = {
+              codigo: data.key,
+              Data: ReceitaItem.Data,
+              ListaReceita: ReceitaItem.ListaReceita,
+              NomeCliente: ReceitaItem.NomeCliente
+        }
+        this.Imprimir(dados)
+        
       })
       this.$root.$emit("Spinner::hide")
     },

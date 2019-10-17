@@ -19,15 +19,20 @@
                 @include make-col(12) 
                 @include make-col-offset(0)          
     .side-bar
-        @include make-col(3)     
         background-color: $color-primario
         color: white
+        position: fixed
+        top: 0
+        bottom: 0
+        overflow-y: auto
+        width: 300px
+        @include make-col(3)    
         @include media-breakpoint-down(md)
             @include make-col(12)
+            overflow: hidden
             position: fixed
             top: 0
-            left: 0
-            right: 0
+            height: 85px
             width: 100%
             .menu-lista
                 &-item
@@ -72,12 +77,14 @@
                         background-color: $color-secundario
     .content-bar
         @include make-col(9)
+        margin-left: 300px
         padding: 20px
         .grupo-botoes
             margin-top: 50px
         @include media-breakpoint-down(md)
             @include make-col(12)
             margin-top: 120px
+            margin-left: 0px
         .titulo
                 margin: 50px auto
     

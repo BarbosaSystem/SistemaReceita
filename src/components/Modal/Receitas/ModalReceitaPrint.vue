@@ -25,11 +25,6 @@
                     <br />
                     <span class="observacao">Observação: {{lista.Descricao}}</span>
                   </li>
-                  <!-- <li class="lista-receita-item">
-                    2 - Piemont ou Viatine 10mg - 90 dias
-                    <br />
-                    <span class="observacao">Observação: tomar 1 cp. anoite.</span>
-                  </li> -->
                 </ul>
               </div>
             </div>
@@ -95,6 +90,9 @@ export default {
       this.OcultarModal();
       window.print();
     },
+    CarregarCriacao(dados){
+      this.Receita = dados
+    },
     CarregarInfo(dados){
       let receita = this.GetReceitaInfo(dados)
       this.Receita = {
@@ -107,7 +105,13 @@ export default {
   created() {
     this.$root.$on("ModalPrint::show", (ReceitaItens) => {
       this.MostrarModal();
-      this.CarregarInfo(ReceitaItens)
+      if(typeof(ReceitaItens) === 'object'){
+        this.CarregarCriacao(ReceitaItens)
+      }
+      else{
+        this.CarregarInfo(ReceitaItens)
+      }
+      /*  */
       /* console.log(this.GetReceitaInfo(ReceitaItens)) */
     });
     this.$root.$on("ModalPrint::hide", () => {
