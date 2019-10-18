@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import { store } from './Store/store'
+import AuthGuard from '../src/helpers/authguard'
 
 Vue.use(Router)
 
@@ -9,6 +9,7 @@ export const router = new Router({
     {
       path: '/about',
       name: 'about',
+      beforeEnter: AuthGuard,
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
@@ -17,6 +18,7 @@ export const router = new Router({
     {
       path: '/',
       name: 'home',
+      beforeEnter: AuthGuard,
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
@@ -24,7 +26,7 @@ export const router = new Router({
     },
     {
       path: '/login',
-      name: 'login',
+      name: 'Login',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
@@ -32,7 +34,7 @@ export const router = new Router({
     },
     {
       path: '/recover',
-      name: 'Recever',
+      name: 'Recover',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
@@ -41,6 +43,7 @@ export const router = new Router({
     {
       path: '/nova_receita',
       name: 'NewReceita',
+      beforeEnter: AuthGuard,
       meta: {
         title: 'Nova Receita',
         requiresAuth: true
@@ -53,7 +56,8 @@ export const router = new Router({
     },
     {
       path: '/receitas',
-      name: 'lista_receitas',
+      name: 'Lista_Receita',
+      beforeEnter: AuthGuard,
       meta: {
         title: 'Relação de Clientes',
         requiresAuth: true
@@ -66,33 +70,19 @@ export const router = new Router({
     {
       path: '/usuarios',
       name: 'lista_usuarios',
+      beforeEnter: AuthGuard,
       meta: {
-        title: 'Nova Receita',
+        title: 'Usuário',
         requiresAuth: true
       },
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
+      /* component: () => import(/* webpackChunkName: "about" './views/Usuario/RelacaoUsuario.vue') */
       component: () => import(/* webpackChunkName: "about" */ './views/Usuario/RelacaoUsuario.vue')
     }
   ]
 })
-router.beforeEach((to, from, next) => {
-  
-  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
-  const currentUser = store.getters.GetLogin
 
-  if(to.name === '/'){
-    next('/login')
-  }
-
-  if(requiresAuth && !currentUser){
-    next('/login')
-  }else if (requiresAuth && currentUser){
-    next()
-  }else {
-    next()
-  }
-})
 
 export default router

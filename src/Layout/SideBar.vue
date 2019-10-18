@@ -47,8 +47,10 @@ export default {
       setTimeout(() => {
         this.Logout();
         /* this.$router.push({ name: "login" }); */
+        this.$router.push("/login");
         this.$root.$emit("Spinner::hide");
       }, 500);
+      
     }
   }
 }

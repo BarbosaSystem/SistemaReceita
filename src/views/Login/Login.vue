@@ -40,19 +40,33 @@
 import {mapActions, mapGetters} from 'vuex'
 export default {
     computed: {
-        ...mapGetters(["GetLogin"])
+        ...mapGetters(["GetLogin"]),
+        user(){
+            return this.GetLogin
+        }
     },
     created() {
-    if (this.GetLogin) {
-      this.$router.push("/receitas");
-    }
-  },
+        if (this.GetLogin) {
+            /* this.$router.replace('/receitas') */
+        /* this.$router.push("/receitas"); */
+        }
+    },
     data(){
         return {
             Loading: false,
             email: 'leobo@hotmail.com',
             password: 'comandos'
         }
+    },
+    beforeRouteEnter (to, from, next) {
+        // ...
+        next( () => {
+            if(localStorage.getItem('token')){
+                next('/nova_receita')
+            }else{
+                next()
+            }
+        })
     },
     methods: {
         ...mapActions(["AdicionarLogin"]),
@@ -66,8 +80,6 @@ export default {
                     uid: user.user.uid,
                     displayName: user.user.displayName,
                     email: user.user.email,
-                    photoURL: user.user.photoURL,
-                    phoneNumber: user.user.phoneNumber
                 };
 
                 this.AdicionarLogin(usuario)
@@ -79,7 +91,14 @@ export default {
             this.Loading = false
             this.$root.$emit("Spinner::hide");
         }
-    }
+    },
+    watch: {
+        user(value){
+            if(value !== null && value !== undefined){
+                this.$router.push("/nova_receita")
+            }
+        }
+    },
 }
 </script>
 <style lang="css">

@@ -5,6 +5,7 @@ const Login = {
     mutations: {
         MutationLogin(state, payload){
             state.login = payload
+            localStorage.setItem('token', payload)
         }
         
     },
@@ -14,21 +15,17 @@ const Login = {
         },
         Logout({commit}){
             commit("MutationLogin", null)
-            window.uid = null
+            localStorage.removeItem('token')
+            
         },
-        Reconectar({
-            commit
-        }, payload) {
+        Reconectar({commit}, payload) {
             if (payload) {
-                if (window.uid) {
-                    let usuario = {
-                        uid: payload.uid,
-                        displayName: payload.displayName,
-                        email: payload.email,
-                        photoURL: payload.photoURL,
-                    }
-                    commit("MutationLogin", usuario)
+                let usuario = {
+                    uid: payload.uid,
+                    displayName: payload.displayName,
+                    email: payload.email,
                 }
+                commit("MutationLogin", usuario)
             }
         },
     },
