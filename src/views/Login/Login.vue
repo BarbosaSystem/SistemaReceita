@@ -54,8 +54,8 @@ export default {
     data(){
         return {
             Loading: false,
-            email: 'leobo@hotmail.com',
-            password: 'comandos'
+            email: '',
+            password: ''
         }
     },
     beforeRouteEnter (to, from, next) {

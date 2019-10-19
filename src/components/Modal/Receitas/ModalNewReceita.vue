@@ -40,9 +40,9 @@ export default {
   data() {
     return {
       listaReceita: {
-        Item:'Anador',
-        quantidade: '1cx',
-        descricao: '8 em 8 horas',
+        Item:'',
+        quantidade: '',
+        descricao: '',
       },
       ShowModal: false,
       alerta: false
