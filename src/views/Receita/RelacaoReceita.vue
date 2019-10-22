@@ -11,11 +11,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in GetLoadReceitas" :key="item.codigo">
+          <tr class="text-center" v-for="item in GetLoadReceitas" :key="item.codigo">
             <td>{{item.NomeCliente}}</td>
             <td>{{item.Data}}</td>
             <td class="opcoes">
-              <button class="btn btn-primary" @click="AbrirModalMostrarReceita(item.codigo)">
+              <button class="btn btn-primary mx-3" @click="AbrirModalMostrarReceita(item.codigo)">
                 <i class="fas fa-search"></i>
               </button>
               <button class="btn btn-danger" @click="RemoverCliente(item)">

@@ -27,7 +27,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="item in ReceitaItens.itens" :key="item.codigo">
+                <tr class="text-center" v-for="item in ReceitaItens.itens" :key="item.codigo">
                   <td>{{item.NomeItem}}</td>
                   <td>{{item.Quantidade}}</td>
                   <td>{{item.Descricao}}</td>
@@ -74,6 +74,7 @@ export default {
     },
     Imprimir(codigo){
       this.$root.$emit("ModalPrint::show", codigo); 
+      this.OcultarModal()
     }
   },
   computed: {

@@ -6,13 +6,11 @@
       Nome do Paciente: {{GetCliente}}
       <button class="btn btn-warning" @click="EditarCliente()"><i class="fa fa-edit"></i></button>
     </h4>         
-    
     </template>
-
     <template v-else-if="Editar">
       <div class="form-group">
         <div class="input-group mb-3">
-          <input v-model="Cliente.Nome" type="text" class="form-control" placeholder="Nome do Cliente" aria-label="Recipient's username" aria-describedby="button-addon2">
+          <input autofocus v-model="Cliente.Nome" type="text" class="form-control" placeholder="Nome do Cliente" aria-label="Recipient's username" aria-describedby="button-addon2">
           <div class="input-group-append">
             <button :disabled="(Cliente.Nome == '')" @click="AdicionarCliente()" style="margin: 0px" class="btn btn-primary" type="button" id="button-addon2">
             <i class="fa fa-check"></i> Gravar
@@ -37,7 +35,7 @@
               <td>{{item.Quantidade}}</td>
               <td>{{item.Descricao}}</td>
               <td class="text-center">
-                <button class="btn btn-warning" @click="MostrarReceitaItem(index)">
+                <button class="btn btn-warning mx-3" @click="MostrarReceitaItem(index)">
                   <i class="fas fa-pen-square"></i>
                 </button>
                 <button class="btn btn-danger" @click="RemoverReceitaItem(index)">
@@ -52,10 +50,10 @@
         </button>
       </div>
       <div class="grupo-botoes" v-if="ListaReceita.length >= 1">
-        <button class="btn btn-sucesso" @click="GravarDados()">
+        <button class="btn btn-sucesso mr-auto" @click="GravarDados()">
           <i class="fas fa-check-circle"></i> Gravar Dados
         </button>
-        <button class="btn btn-cancelar">
+        <button class="btn btn-cancelar ml-5">
           <i class="fas fa-ban"></i> Cancelar
         </button>
       </div>
@@ -141,7 +139,7 @@ export default {
       this.$root.$emit("Spinner::show")
       let dataReceita = new Date()
       var ReceitaItem = {
-        NomeCliente: this.Cliente.Nome,
+        NomeCliente: this.Cliente.Nome.toUpperCase(),
         ListaReceita: this.ListaReceita,
         Data: dataReceita.getDate() +'/'+ (dataReceita.getMonth() + 1 )+'/' + dataReceita.getFullYear()
       }

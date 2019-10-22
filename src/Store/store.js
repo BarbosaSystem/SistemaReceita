@@ -2,13 +2,14 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Login from './modules/login'
 import Receita from './modules/Receita'
+import Configuracao from './modules/configuracao'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   strict: true,
   modules: {
-    Login, Receita
+    Login, Receita, Configuracao
   },
   state: {
     DadosGravados: false

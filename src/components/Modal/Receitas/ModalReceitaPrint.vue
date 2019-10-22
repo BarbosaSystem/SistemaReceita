@@ -5,7 +5,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="card">
-            <div class="card-header text-center" style="visibility: hidden;">
+            <div class="card-header text-center" :style="{visibility: !MostrarCabecalho ? 'hidden' : 'visible'}" >
               <h1 class="text-center">Dr. José Jacinto Araújo Martins</h1>
               <h4 class="text-center">ENDOCRINOLOGIA E METABOLOGIA</h4>
               <h4 class="text-center">CRM 19.018</h4>
@@ -28,7 +28,7 @@
                 </ul>
               </div>
             </div>
-            <div class="card-footer" style="visibility: hidden; position: fixed; bottom: 0; left:0; right:0; text-align: center">
+            <div class="card-footer" :style="{visibility: !MostrarCabecalho ? 'hidden' : 'visible'}" style="position: fixed; bottom: 0; left:0; right:0; text-align: center">
               <h5 class="text-center">Rua Barão do Rio Branco, 681 - SALA 1006 - Centro - Ed. Climério Vieira</h5>
               <h5 class="text-center">Fone: (33) 3271-7394 / 99803-7394 - Governador Valadares - Minas Gerais</h5>
             </div>
@@ -65,6 +65,7 @@ import { mapGetters } from 'vuex';
 export default {
   data() {
     return {
+      MostrarCabecalho: false,
       print: false,
       ShowModal: false,
       Receita: {
@@ -103,6 +104,7 @@ export default {
     }
   },
   created() {
+    var vm = this
     this.$root.$on("ModalPrint::show", (ReceitaItens) => {
       this.MostrarModal();
       if(typeof(ReceitaItens) === 'object'){
@@ -111,6 +113,11 @@ export default {
       else{
         this.CarregarInfo(ReceitaItens)
       }
+
+      this.$firebase.database().ref('ConfiguraçõesGerais/Mostrar-Cabecalho/').once('value')
+        .then((data) => {
+          vm.MostrarCabecalho = data.val()
+        })
       /*  */
       /* console.log(this.GetReceitaInfo(ReceitaItens)) */
     });

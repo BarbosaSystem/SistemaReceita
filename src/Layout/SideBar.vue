@@ -15,7 +15,7 @@
         </router-link>
         <router-link class="menu-lista-item" to="/usuarios" tag="li" replace active-class="ativo">
           <a class="link">
-            <i class="fas fa-user"></i> <span class="item-li">Usuários do Sistema</span>
+            <i class="fas fa-user-cog"></i> <span class="item-li">Configurações do Sistema</span>
           </a>
         </router-link>
         <!-- <router-link class="menu-lista-item" to="/configuracao" tag="li" replace active-class="ativo">

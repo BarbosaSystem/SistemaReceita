@@ -12,7 +12,7 @@
           <div class="modal-body">
             <!-- <p>Woohoo, you're reading this text in a modal!</p> -->
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Nome do Item" v-model="listaReceita.Item">
+                <input type="text" autofocus class="form-control" placeholder="Nome do Item" v-model="listaReceita.Item">
                 <input type="text" class="form-control" placeholder="Quantidade" v-model="listaReceita.quantidade">
                 <textarea class="form-control" cols="30" rows="10" placeholder="Descrição de uso" v-model="listaReceita.descricao"></textarea>
             </div>
@@ -37,6 +37,7 @@
 <script>
 import { mapActions } from 'vuex';
 export default {
+ 
   data() {
     return {
       listaReceita: {
@@ -69,9 +70,9 @@ export default {
     async AdicionarItens(){
       if(this.ValidarFormulario(this.listaReceita.Item) && this.ValidarFormulario(this.listaReceita.quantidade) && this.ValidarFormulario(this.listaReceita.descricao)){
         var receita = {
-          NomeItem: this.listaReceita.Item,
-          Quantidade: this.listaReceita.quantidade,
-          Descricao: this.listaReceita.descricao
+          NomeItem: this.listaReceita.Item.toUpperCase(),
+          Quantidade: this.listaReceita.quantidade.toUpperCase(),
+          Descricao: this.listaReceita.descricao.toUpperCase()
         }
         this.$emit('AddItemLista', receita)
         /* this.ActionAdicionarReceitaItem(receita) */
