@@ -70,7 +70,9 @@
 /* import UsuarioNew from "../../components/Modal/Usuarios/ModalNewUsuario"; */
 import UsuarioView from "../../components/Modal/Usuarios/ModalViewUsuario"
 import { mapGetters, mapActions } from 'vuex';
+import mix_firebase from '../../helpers/firebaseCrud'
 export default {
+  mixins: [mix_firebase],
   data() {
     return {
       MostrarCabecalho: false
@@ -88,21 +90,13 @@ export default {
   methods: {
     ...mapActions(["ActionAlterarCabecalho"]),
     async Cabecalho(){
+      let valor = this.MostrarCabecalho ? 'Deseja Habilitar esta configuração?' : 'Deseja Desabilitar esta configuiração?' 
       var vm = this
-      if(this.MostrarCabecalho){
-        if(confirm("Deseja dabilitar a exibição do cabeçalho e rodapé?")){
-          await this.$firebase.database().ref('ConfiguraçõesGerais/Mostrar-Cabecalho/').set(this.MostrarCabecalho).then( () => {
+      if(confirm(valor)){
+        await this.$firebase.database().ref('ConfiguraçõesGerais/Mostrar-Cabecalho/').set(this.MostrarCabecalho).then( () => {
             vm.ActionAlterarCabecalho(this.MostrarCabecalho)
             alert("Alteração realizada com sucesso")
-          })
-        }
-      }else{
-        if(confirm("Deseja desabitar a exibição do cabeçalho e rodapé?")){
-          await this.$firebase.database().ref('ConfiguraçõesGerais/Mostrar-Cabecalho/').set(this.MostrarCabecalho).then( () => {
-            vm.ActionAlterarCabecalho(this.MostrarCabecalho)
-            alert("Alteração realizada com sucesso")
-          })
-        }
+        })
       }
     },
     async CarregarConfiguracao (){

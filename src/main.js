@@ -6,6 +6,7 @@ import './style/estilo.sass'
 import FirebaseVue from './firebase'
 
 Vue.use(FirebaseVue)
+
 Vue.config.productionTip = false
 
 new Vue({
