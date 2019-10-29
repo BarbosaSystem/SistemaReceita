@@ -68,11 +68,11 @@ export const router = new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/Receita/RelacaoReceita.vue')
     },
     {
-      path: '/usuarios',
-      name: 'lista_usuarios',
+      path: '/configuracao',
+      name: 'configuracao',
       beforeEnter: AuthGuard,
       meta: {
-        title: 'Usuário',
+        title: 'Configurações',
         requiresAuth: true
       },
       // route level code-splitting

@@ -67,7 +67,9 @@ import ModalNovo from '../../components/Modal/Receitas/ModalNewReceita'
 import ModalEdit from '../../components/Modal/Receitas/ModalEditReceita'
 import ReceitaPrint from '../../components/Modal/Receitas/ModalReceitaPrint'
 import { mapActions, mapGetters } from 'vuex'
+import mix from '../../helpers/firebaseCrud'
 export default {
+  mixins: [mix],
   components: {
     ModalNovo, ReceitaPrint, ModalEdit
   },

@@ -3,7 +3,14 @@
     <h1 class="text-center titulo-logo">MLM SISTEMAS</h1>
     <div class="menu">
       <ul class="menu-lista">
-        <router-link class="menu-lista-item" to="/nova_receita" tag="li" replace active-class="ativo">
+        <div v-for="menuItem in SELECT_MENU" :key="menuItem.Codigo">
+          <router-link class="menu-lista-item" :to="menuItem.Path" tag="li" replace active-class="ativo">
+            <a class="link">
+              <i class="fa" :class="menuItem.Icon"></i><span class="item-lit"> {{menuItem.Titulo}}</span>
+            </a>
+          </router-link>
+        </div>
+        <!-- <router-link class="menu-lista-item" to="/nova_receita" tag="li" replace active-class="ativo">
           <a class="link">
             <i class="fas fa-plus-circle"></i> <span class="item-li">Nova Receita</span>
           </a>
@@ -13,11 +20,11 @@
             <i class="fas fa-list-alt"></i> <span class="item-li">Relação de Receitas</span>
           </a>
         </router-link>
-        <router-link class="menu-lista-item" to="/usuarios" tag="li" replace active-class="ativo">
+        <router-link class="menu-lista-item" to="/configuracao" tag="li" replace active-class="ativo">
           <a class="link">
             <i class="fas fa-user-cog"></i> <span class="item-li">Configurações do Sistema</span>
           </a>
-        </router-link>
+        </router-link> -->
         <!-- <router-link class="menu-lista-item" to="/configuracao" tag="li" replace active-class="ativo">
           <a class="link">
             <i class="fas fa-cog"></i> <span class="item-li">Configurações</span>
@@ -35,9 +42,10 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex';
+
 export default {
   computed: {
-    ...mapGetters(["GetLogin"])
+    ...mapGetters(["GetLogin", "SELECT_MENU"])
   },
   methods: {
     ...mapActions(["Logout"]),
