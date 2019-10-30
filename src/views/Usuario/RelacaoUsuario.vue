@@ -70,9 +70,7 @@
 /* import UsuarioNew from "../../components/Modal/Usuarios/ModalNewUsuario"; */
 import UsuarioView from "../../components/Modal/Usuarios/ModalViewUsuario"
 import { mapGetters, mapActions } from 'vuex';
-import mix_firebase from '../../helpers/firebaseCrud'
 export default {
-  mixins: [mix_firebase],
   data() {
     return {
       MostrarCabecalho: false
