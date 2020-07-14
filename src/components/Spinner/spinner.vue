@@ -16,8 +16,6 @@ export default {
         }
     },
     computed: {
-        
-        
     },
     methods: {
         AlterarSpinner(payload){
